@@ -1,5 +1,5 @@
 import React from 'react';
-import { List as MUIList, ListItem, ListItemAvatar, ListItemText, Avatar, ListeItemSecondaryAction, IconButton, Slide } from '@material-ui/core';
+import { List as MUIList, ListItem, ListItemAvatar, ListItemText, Avatar, ListItemSecondaryAction, IconButton, Slide } from '@material-ui/core';
 import { Delete, MoneyOff } from '@material-ui/icons';
 
 import useStyles from './styles';
@@ -24,12 +24,12 @@ const List = () => {
                             </Avatar>
                         </ListItemAvatar>
                         <ListItemText primary={transaction.category} secondary={`$${transaction.amount} - ${transaction.date}`}/>
-                        <ListeItemSecondaryAction>
+                        <ListItemSecondaryAction>
                             <IconButton edge="end" aria-label="delete" onClick="">
                                 <Delete />
 
                             </IconButton>
-                        </ListeItemSecondaryAction>
+                        </ListItemSecondaryAction>
                     </ListItem>
 
                 </Slide>
