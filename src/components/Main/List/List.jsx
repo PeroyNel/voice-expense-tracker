@@ -7,9 +7,9 @@ import useStyles from './styles';
 
 const List = () => {
     const classes = useStyles();
-    const globalState = useContext(ExpenseTrackerContext);
+    const { deleteTransaction } = useContext(ExpenseTrackerContext);
 
-    console.log(globalState);
+    //console.log(globalState);
 
     const transactions = [
         { id: 1, type: "Income", category: 'Salary', amount: 50, date: "Wed Dec 16" },
