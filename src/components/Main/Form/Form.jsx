@@ -21,16 +21,16 @@ const Form = () => {
     const [formData, setFormData] = useState(initialState);
     const { addTransaction } = useContext(ExpenseTrackerContext);
 
+    
     const createTransaction = () => {
-        const createTransaction = () => {
-            const transaction = { ...formData, amount: Number(formData.amount), id: uuidv4() }
+        const transaction = { ...formData, amount: Number(formData.amount), id: uuidv4() }
             
-            addTransaction(transaction);
-            setFormData(initialState);
-        }
+        addTransaction(transaction);
+        setFormData(initialState);
+    }
         
 
-    }
+    
     return (
         <Grid container spacing={2}>
             <Grid item xs={12}>
