@@ -1,36 +1,33 @@
-import { useContext } from 'react-dom';
+
+import { useContext } from 'react';
 import { ExpenseTrackerContext } from './context/context';
+
 import { incomeCategories, expenseCategories, resetCategories } from './constants/categories';
 
 const useTransactions = (title) => {
-    resetCategories();
+  resetCategories();
+  const { transactions } = useContext(ExpenseTrackerContext);
+  const rightTransactions = transactions.filter((t) => t.type === title);
+  const total = rightTransactions.reduce((acc, currVal) => acc += currVal.amount, 0);
+  const categories = title === 'Income' ? incomeCategories : expenseCategories;
 
-    const { transactions } = useContext(ExpenseTrackerContext);
-    const transactionsPerType = transactions.filter((t) => t.type === title);
-    const total = transactionsPerType.reduce((acc, currValue) => acc += currValue.amount, 0);
+  rightTransactions.forEach((t) => {
+    const category = categories.find((c) => c.type === t.category);
 
-    const categories = title === 'Income' ? incomeCategories : expenseCategories;
+    if (category) category.amount += t.amount;
+  });
 
-    console.log({ transactionsPerType, total, categories });
+  const filteredCategories = categories.filter((sc) => sc.amount > 0);
 
-    transactionsPerType.forEach((t) => {
-        const category = categories.find((c) => c.type === t.category)
+  const chartData = {
+    datasets: [{
+      data: filteredCategories.map((c) => c.amount),
+      backgroundColor: filteredCategories.map((c) => c.color),
+    }],
+    labels: filteredCategories.map((c) => c.type),
+  };
 
-        if (category) category.amount += t.amount;
-    })
-
-    const filteredCategories = categories.filter((c) => c.amount > 0);
-
-    const chartData = {
-        datasets: [{
-            data: filteredCategories.map((c) => c.amount),
-            backgroundColor: filteredCategories((c) => c.color)
-        }],
-        labels: filteredCategories.map((c) => c.type)
-    }
-
-    return { total, chartData }
-
-}
+  return { filteredCategories, total, chartData };
+};
 
 export default useTransactions;
