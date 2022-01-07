@@ -40,7 +40,7 @@ const Form = () => {
     return (
         <Grid container spacing={2}>
             <Grid item xs={12}>
-                <Typography align="center" variant="subtitle" gutterBottom>
+                <Typography align="center" variant="subtitle1" gutterBottom>
                     ...
 
                 </Typography>
